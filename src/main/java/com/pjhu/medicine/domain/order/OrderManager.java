@@ -11,7 +11,6 @@ public class OrderManager {
     @Transactional(readOnly = true)
     public Order getOrder(String id) {
         return Order.builder()
-                .id(id)
                 .name("name")
                 .shortDescription("short description")
                 .longDescription("long descriptin")
