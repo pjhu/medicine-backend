@@ -21,10 +21,20 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.flywaydb:flyway-core')
     compile('org.projectlombok:lombok')
     compile('com.h2database:h2')
+
+    // postgres
     compile('org.postgresql:postgresql:42.2.2')
+
+    // flyway migrate
+    compile('org.flywaydb:flyway-core')
+
+    // aliyun email
+    compile files('libs/aliyun-java-sdk-core-3.0.0.jar')
+    compile files('libs/aliyun-java-sdk-dm-3.1.0.jar')
+
+    // test
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

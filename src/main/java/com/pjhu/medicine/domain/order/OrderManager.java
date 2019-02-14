@@ -1,20 +1,19 @@
 package com.pjhu.medicine.domain.order;
 
+import com.pjhu.medicine.infrastructure.notification.email.AliyunEmailClient;
+import com.pjhu.medicine.infrastructure.notification.email.SendEmailCommand;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class OrderManager {
 
-    private OrderRepository orderRepository;
-
-    @Autowired
-    public OrderManager(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
+    private final OrderRepository orderRepository;
+    private final AliyunEmailClient emailClient;
 
     @Transactional(readOnly = true)
     public Order getOrder(String id) {
@@ -29,6 +28,10 @@ public class OrderManager {
     public String create(OrderCreateCommand command) {
         Order order = command.newOrder(command);
         orderRepository.save(order);
+        SendEmailCommand emailCommand = SendEmailCommand.builder()
+                .accountName("account name")
+                .build();
+        emailClient.send(emailCommand);
         return order.getId();
     }
 }

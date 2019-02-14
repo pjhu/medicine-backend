@@ -10,3 +10,9 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+
+aliyun:
+  email:
+    region: cn-hangzhou
+    accessKey: accessKey
+    accessSecret: accessSecret
