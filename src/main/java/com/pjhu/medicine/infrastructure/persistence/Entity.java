@@ -13,16 +13,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 @ToString(callSuper = true)
 public abstract class Entity extends Identifiable {
-    @CreatedBy
     private String createdBy;
-    @CreatedDate
     private LocalDateTime createdAt;
-    @LastModifiedBy
     private String lastModifiedBy;
-    @LastModifiedDate
     private LocalDateTime lastModifiedAt;
 
     public void forceUpdateForAuditing() {

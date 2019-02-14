@@ -8,5 +8,5 @@ import lombok.Getter;
 public class OrderResponse {
 
     private String name;
-    private String shortDescription;
+    private String totalPrice;
 }

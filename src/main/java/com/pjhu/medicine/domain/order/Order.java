@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.Table;
 
 @javax.persistence.Entity
-@Table(name = "order")
+@Table(name = "USER_ORDER")
 @Builder
 @Getter
 @Setter
@@ -15,6 +15,6 @@ import javax.persistence.Table;
 public class Order extends Entity {
 
     private String name;
-    private String shortDescription;
-    private String longDescription;
+    private String quantity;
+    private String totalPrice;
 }
