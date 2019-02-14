@@ -1,12 +1,14 @@
 plugins {
     id 'org.springframework.boot' version '2.1.2.RELEASE'
     id 'java'
+    id "org.flywaydb.flyway" version "5.2.4"
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.flywaydb.flyway'
 
 group = 'com.pjhu'
 version = '0.0.1-SNAPSHOT'
@@ -17,11 +19,17 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.flywaydb:flyway-core')
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'org.postgresql:postgresql'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile('org.projectlombok:lombok')
+    compile('com.h2database:h2')
+    compile('org.postgresql:postgresql:42.2.2')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+flyway {
+    url = 'jdbc:postgresql://localhost:15432/medicine'
+    user = 'postgres'
+    password = '123'
 }
