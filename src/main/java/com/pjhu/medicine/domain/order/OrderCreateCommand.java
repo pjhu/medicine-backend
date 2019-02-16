@@ -14,11 +14,11 @@ public class OrderCreateCommand {
     private Integer quantity;
     private String address;
 
-    public Order newOrder(OrderCreateCommand command) {
+    public Order newOrder() {
         return Order.builder()
-                .name(command.name)
-                .quantity(command.getQuantity().toString())
-                .totalPrice(command.getTotalPrice())
+                .name(getName())
+                .quantity(getQuantity().toString())
+                .totalPrice(getTotalPrice())
                 .build();
     }
 }

@@ -26,7 +26,7 @@ public class OrderManager {
 
     @Transactional
     public String create(OrderCreateCommand command) {
-        Order order = command.newOrder(command);
+        Order order = command.newOrder();
         orderRepository.save(order);
         SendEmailCommand emailCommand = SendEmailCommand.builder()
                 .accountName("account name")

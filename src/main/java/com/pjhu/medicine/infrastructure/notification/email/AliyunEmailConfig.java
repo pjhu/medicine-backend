@@ -1,4 +1,4 @@
-package com.pjhu.medicine.domain.common;
+package com.pjhu.medicine.infrastructure.notification.email;
 
 import lombok.Getter;
 import lombok.Setter;

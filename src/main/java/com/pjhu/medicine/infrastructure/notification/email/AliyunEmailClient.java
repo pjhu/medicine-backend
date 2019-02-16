@@ -2,7 +2,6 @@ package com.pjhu.medicine.infrastructure.notification.email;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.dm.model.v20151123.SingleSendMailRequest;
-import com.aliyuncs.dm.model.v20151123.SingleSendMailResponse;
 import com.aliyuncs.exceptions.ClientException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +17,9 @@ public class AliyunEmailClient {
     public void send(SendEmailCommand command) {
         SingleSendMailRequest request = command.getRequestFrom();
         try {
-            SingleSendMailResponse httpResponse = aliyunEmailTemplate.getAcsResponse(request);
+            aliyunEmailTemplate.getAcsResponse(request);
         } catch (ClientException e) {
+            log.error("send email failed", e);
             e.printStackTrace();
         }
     }

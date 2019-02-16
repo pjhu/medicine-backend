@@ -23,17 +23,15 @@ public class SendEmailCommand {
 
     public SingleSendMailRequest getRequestFrom() {
         SingleSendMailRequest request = new SingleSendMailRequest();
-        request.setAccountName(accountName);
-        request.setFromAlias(fromAlias);
-        request.setAddressType(addressType);
-        request.setTagName(tagName);
-        request.setReplyToAddress(replyToAddress);
-        //可以给多个收件人发送邮件，收件人之间用逗号分开，批量发信建议使用BatchSendMailRequest方式
-        request.setToAddress(String.join(", ", toAddresses));
-        request.setSubject(subject);
-        request.setHtmlBody(htmlBody);
+        request.setAccountName(getAccountName());
+        request.setFromAlias(getFromAlias());
+        request.setAddressType(getAddressType());
+        request.setTagName(getTagName());
+        request.setReplyToAddress(getReplyToAddress());
+        request.setToAddress(String.join(", ", getToAddresses()));
+        request.setSubject(getSubject());
+        request.setHtmlBody(getHtmlBody());
         return request;
-
     }
 
 }
