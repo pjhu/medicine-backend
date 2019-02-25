@@ -4,6 +4,7 @@ import com.pjhu.medicine.infrastructure.notification.email.AliyunEmailClient;
 import com.pjhu.medicine.infrastructure.notification.email.SendEmailCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ public class OrderManager {
     private final OrderRepository orderRepository;
     private final AliyunEmailClient emailClient;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional(readOnly = true)
     public Order getOrder(String id) {
         return Order.builder()
@@ -24,6 +26,7 @@ public class OrderManager {
                 .build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public String create(OrderCreateCommand command) {
         Order order = command.newOrder();

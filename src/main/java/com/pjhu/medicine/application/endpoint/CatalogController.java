@@ -6,10 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import static com.pjhu.medicine.infrastructure.common.Constant.ROOT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RestController
-@RequestMapping(value = "/catalogs", produces = APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = ROOT + "/catalogs", produces = APPLICATION_JSON_UTF8_VALUE)
 @RequiredArgsConstructor
 public class CatalogController {
 

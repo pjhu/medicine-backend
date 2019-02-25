@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:15432/medicine
+    url: jdbc:postgresql://localhost:55432/medicine
     username: postgres
     password: 123
 
@@ -11,8 +11,17 @@ spring:
           lob:
             non_contextual_creation: true
 
+auth:
+  admin:
+    token:
+      expire: 3600
+
 aliyun:
   email:
     region: cn-hangzhou
     accessKey: accessKey
     accessSecret: accessSecret
+
+redis:
+  host: localhost
+  port: 56379

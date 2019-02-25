@@ -11,10 +11,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
+import static com.pjhu.medicine.infrastructure.common.Constant.ROOT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RestController
-@RequestMapping(value = "/orders", produces = APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = ROOT + "/orders", produces = APPLICATION_JSON_UTF8_VALUE)
 public class OrderController {
 
     private final OrderManager orderManager;

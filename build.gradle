@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.1.2.RELEASE'
     id 'java'
@@ -21,13 +30,17 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile('org.springframework.boot:spring-boot-starter-data-redis')
+    compile('redis.clients:jedis')
+
     compile('org.projectlombok:lombok')
     compile('com.h2database:h2')
     compile('org.postgresql:postgresql:42.2.2')
 
     compile('com.google.guava:guava:23.5-jre')
     compile('org.apache.commons:commons-lang3:3.1')
-    
+
     compile('org.apache.poi:poi-ooxml:4.0.0')
     compile('com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.8')
     compile('commons-io:commons-io:2.6')
@@ -42,6 +55,7 @@ dependencies {
 
     // test
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("org.springframework.security:spring-security-test")
 }
 
 flyway {

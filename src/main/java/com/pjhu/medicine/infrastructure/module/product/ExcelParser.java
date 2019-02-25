@@ -26,6 +26,10 @@ public class ExcelParser {
         this.sheet = workbook.getSheetAt(0);
     }
 
+    public static ExcelParser getInstance(MultipartFile input){
+        return new ExcelParser(input);
+    }
+
     public void parse() {
         Iterator<Row> rowIterator = sheet.rowIterator();
         Row headerRow = rowIterator.next();
@@ -39,10 +43,6 @@ public class ExcelParser {
                 break;
             }
         }
-    }
-
-    public static ExcelParser getInstance(MultipartFile input){
-        return new ExcelParser(input);
     }
 
     public ArrayList<ItemData> getCatalogs() {

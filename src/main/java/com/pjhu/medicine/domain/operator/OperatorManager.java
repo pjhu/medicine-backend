@@ -1,21 +1,21 @@
-package com.pjhu.medicine.domain.report.order;
+package com.pjhu.medicine.domain.operator;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
+@Slf4j
 @RequiredArgsConstructor
-public class OrderReporter {
+public class OperatorManager {
 
-    private final OrderReportRepository orderReportRepository;
+    private final OperatorRepository operatorRepository;
 
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional(readOnly = true)
-    public List<Order> findAllOrders() {
-        return orderReportRepository.findAllOrders();
+    public Operator findOperatorBy(String username) {
+        return operatorRepository.findByUsernameAndActiveNot(username, UserStatus.DISABLE);
     }
 }

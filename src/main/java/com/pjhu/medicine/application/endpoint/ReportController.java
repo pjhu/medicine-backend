@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.pjhu.medicine.infrastructure.common.Constant.ROOT;
+
 @RestController
-@RequestMapping(value = "/reports", method = RequestMethod.GET)
+@RequestMapping(value = ROOT + "/reports", method = RequestMethod.GET)
 @RequiredArgsConstructor
 public class ReportController {
 

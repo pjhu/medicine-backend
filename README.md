@@ -16,3 +16,4 @@ docker-compose up -d
 ```
 psql -h postgres -U postgres
 ```
+密码在docker-compose.yml中
