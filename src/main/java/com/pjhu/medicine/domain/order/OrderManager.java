@@ -5,6 +5,8 @@ import com.pjhu.medicine.infrastructure.notification.email.SendEmailCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,12 +31,14 @@ public class OrderManager {
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public String create(OrderCreateCommand command) {
+        SecurityContext context = SecurityContextHolder.getContext();
         Order order = command.newOrder();
         orderRepository.save(order);
         SendEmailCommand emailCommand = SendEmailCommand.builder()
                 .accountName("account name")
                 .build();
-        emailClient.send(emailCommand);
+        // emailClient.send(emailCommand);
+        log.info("send email: " + emailCommand.toString());
         return order.getId();
     }
 }

@@ -17,7 +17,7 @@ public class AliyunEmailClient {
     public void send(SendEmailCommand command) {
         SingleSendMailRequest request = command.getRequestFrom();
         try {
-            aliyunEmailTemplate.getAcsResponse(request);
+             aliyunEmailTemplate.getAcsResponse(request);
         } catch (ClientException e) {
             log.error("send email failed", e);
             e.printStackTrace();
