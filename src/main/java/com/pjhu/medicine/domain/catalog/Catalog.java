@@ -1,18 +1,19 @@
 package com.pjhu.medicine.domain.catalog;
 
-import com.pjhu.medicine.infrastructure.persistence.Entity;
+import com.pjhu.medicine.infrastructure.persistence.AbstractEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@javax.persistence.Entity
+@Entity
 @Table(name = "catalog")
 @Getter
 @Setter
 @Builder
-public class Catalog extends Entity {
+public class Catalog extends AbstractEntity {
 
     private String sku;
     private String name;

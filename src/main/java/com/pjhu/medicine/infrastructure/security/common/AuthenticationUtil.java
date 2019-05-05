@@ -1,4 +1,4 @@
-package com.pjhu.medicine.infrastructure.security;
+package com.pjhu.medicine.infrastructure.security.common;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,10 +10,12 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collections;
 import java.util.List;
 
-public class AuthenticationHelper {
+public class AuthenticationUtil {
+
+    public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String ROLE_PREFIX = "ROLE_";
 
-    private AuthenticationHelper() {
+    private AuthenticationUtil() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -31,4 +33,13 @@ public class AuthenticationHelper {
                 Collections.emptyList() :
                 Collections.singletonList(new SimpleGrantedAuthority(ROLE_PREFIX + role));
     }
+
+    public static String tokenExtract(String header, TokenType tokenType) {
+        if (StringUtils.isBlank(header)) {
+            return StringUtils.EMPTY;
+        }
+
+        return StringUtils.substringAfter(header, tokenType.getPrefix()).trim();
+    }
+
 }

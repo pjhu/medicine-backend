@@ -37,7 +37,7 @@ public class OrderManager {
         SendEmailCommand emailCommand = SendEmailCommand.builder()
                 .accountName("account name")
                 .build();
-        // emailClient.send(emailCommand);
+        emailClient.send(emailCommand);
         log.info("send email: " + emailCommand.toString());
         return order.getId();
     }

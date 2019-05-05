@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @ToString(callSuper = true)
-public abstract class Entity extends Identifiable {
+public abstract class AbstractEntity extends Identifiable {
     @CreatedBy
     private String createdBy;
     @CreatedDate

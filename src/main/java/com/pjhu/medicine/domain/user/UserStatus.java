@@ -1,4 +1,4 @@
-package com.pjhu.medicine.domain.operator;
+package com.pjhu.medicine.domain.user;
 
 public enum UserStatus {
 

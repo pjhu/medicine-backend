@@ -1,7 +1,6 @@
 package com.pjhu.medicine.domain.auth;
 
-import com.pjhu.medicine.domain.operator.Operator;
-import com.pjhu.medicine.infrastructure.cache.OperatorMeta;
+import com.pjhu.medicine.infrastructure.cache.UserMeta;
 import com.pjhu.medicine.infrastructure.common.UuidHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,7 @@ import java.util.concurrent.TimeUnit;
 @Repository
 public class UserTokenRepository {
 
-    private static final String NAME_SPACE = "medicine:auth:token:admin";
-
-    private final RedisTemplate<String, OperatorMeta> redisTemplate;
+    private final RedisTemplate<String, UserMeta> redisTemplate;
     private final AuthConfig authConfig;
 
     @Autowired
@@ -26,27 +23,27 @@ public class UserTokenRepository {
         this.authConfig = authConfig;
     }
 
-    public String create(Operator operator) {
-        OperatorMeta operatorMeta = OperatorMeta.of(operator);
+    public String create(String namespace, UserMeta userMeta) {
         String tokenId = UuidHelper.uuid32();
         redisTemplate.opsForValue()
-                .set(toKey(tokenId), operatorMeta, authConfig.getTokenExpireInterval(), TimeUnit.SECONDS);
+                .set(toKey(namespace, tokenId),
+                        userMeta, authConfig.getTokenExpireInterval(), TimeUnit.SECONDS);
         return tokenId;
     }
 
-    public OperatorMeta getBy(String tokenId) {
-        return redisTemplate.opsForValue().get(toKey(tokenId));
+    public UserMeta getBy(String namespace, String tokenId) {
+        return redisTemplate.opsForValue().get(toKey(namespace, tokenId));
     }
 
-    public void delete(String tokenId) {
-        redisTemplate.delete(toKey(tokenId));
+    public void delete(String namespace, String tokenId) {
+        redisTemplate.delete(toKey(namespace, tokenId));
     }
 
-    public void refresh(String tokenId) {
-        redisTemplate.expire(toKey(tokenId), authConfig.getTokenExpireInterval(), TimeUnit.SECONDS);
+    public void refresh(String namespace, String tokenId) {
+        redisTemplate.expire(toKey(namespace, tokenId), authConfig.getTokenExpireInterval(), TimeUnit.SECONDS);
     }
 
-    private String toKey(String tokenId) {
-        return String.format("%s:%s", NAME_SPACE, tokenId);
+    private String toKey(String namespace, String tokenId) {
+        return String.format("%s:%s", namespace, tokenId);
     }
 }

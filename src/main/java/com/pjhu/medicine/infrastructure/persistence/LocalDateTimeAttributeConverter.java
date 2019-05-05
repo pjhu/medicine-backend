@@ -1,13 +1,13 @@
 package com.pjhu.medicine.infrastructure.persistence;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-@Component
+/**
+ * https://stackoverflow.com/questions/23718383/jpa-support-for-java-8-new-date-and-time-api
+ */
 @Converter(autoApply = true)
 public class LocalDateTimeAttributeConverter implements AttributeConverter<LocalDateTime, Timestamp> {
 

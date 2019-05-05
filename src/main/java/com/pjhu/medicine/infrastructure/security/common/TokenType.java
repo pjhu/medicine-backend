@@ -1,4 +1,4 @@
-package com.pjhu.medicine.infrastructure.security;
+package com.pjhu.medicine.infrastructure.security.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.pjhu.medicine.infrastructure.common;
 
-import com.pjhu.medicine.domain.operator.Role;
+import com.pjhu.medicine.domain.user.Role;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
-import static com.pjhu.medicine.infrastructure.security.AuthenticationHelper.ROLE_PREFIX;
+import static com.pjhu.medicine.infrastructure.security.common.AuthenticationUtil.ROLE_PREFIX;
 
 
 public class SecurityContext {

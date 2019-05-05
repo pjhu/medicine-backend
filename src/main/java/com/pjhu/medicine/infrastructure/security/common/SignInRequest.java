@@ -1,8 +1,7 @@
-package com.pjhu.medicine.domain.auth;
+package com.pjhu.medicine.infrastructure.security.common;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.NotBlank;
 
 @Getter
 @Setter
