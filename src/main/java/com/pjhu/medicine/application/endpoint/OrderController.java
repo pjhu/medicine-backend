@@ -11,11 +11,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
+import static com.pjhu.medicine.infrastructure.common.Constant.ADMIN;
 import static com.pjhu.medicine.infrastructure.common.Constant.ROOT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RestController
-@RequestMapping(value = ROOT + "/orders", produces = APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = ADMIN + "/orders", produces = APPLICATION_JSON_UTF8_VALUE)
 public class OrderController {
 
     private final OrderManager orderManager;
@@ -36,7 +37,7 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<Object> create(@RequestBody OrderCreateCommand command) {
-        String orderId = orderManager.create(command);
+        Long orderId = orderManager.create(command);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(orderId).toUri();

@@ -30,14 +30,14 @@ public class OrderManager {
 
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional
-    public String create(OrderCreateCommand command) {
+    public Long create(OrderCreateCommand command) {
         SecurityContext context = SecurityContextHolder.getContext();
         Order order = command.newOrder();
         orderRepository.save(order);
         SendEmailCommand emailCommand = SendEmailCommand.builder()
                 .accountName("account name")
                 .build();
-        emailClient.send(emailCommand);
+        // emailClient.send(emailCommand);
         log.info("send email: " + emailCommand.toString());
         return order.getId();
     }

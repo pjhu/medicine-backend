@@ -15,7 +15,7 @@ import javax.persistence.MappedSuperclass;
 @Setter
 public abstract class Identifiable {
     @Id
-    @GeneratedValue(generator = "entity_id")
-    @GenericGenerator(name = "entity_id", strategy = "uuid")
-    private String id;
+    @GeneratedValue(generator = "IdGenerator")
+    @GenericGenerator(name = "IdGenerator", strategy = "com.pjhu.medicine.infrastructure.persistence.IdGenerator")
+    private Long id;
 }
