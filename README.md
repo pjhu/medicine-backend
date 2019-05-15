@@ -70,6 +70,4 @@ invalid(meaningless message)​:[MEM-108] - update
 
 - 代码的变化必须体现在测试用例中，不得提交没有测试覆盖的代码
 - 必须用git pull --rebase 同步代码，不得出现类似’Merge remote-tracking branch 'origin/master'的提交信息
-
-
-
+            
