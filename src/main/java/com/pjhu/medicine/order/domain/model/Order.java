@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Order extends AbstractEntity {
 
-    private String name;
+    private long catalogId;
     private String quantity;
     private String totalPrice;
 }

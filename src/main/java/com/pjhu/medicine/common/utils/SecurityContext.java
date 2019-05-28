@@ -9,11 +9,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 
+import static com.pjhu.medicine.identity.utils.AuthenticationUtil.ROLE_PREFIX;
+
 
 public class SecurityContext {
 
     private static final String USERNAME_SYS = "SYSTEM";
-    private static final String ROLE_PREFIX = "ROLE_";
 
     public static String currentUsername() {
         //noinspection Convert2MethodRef

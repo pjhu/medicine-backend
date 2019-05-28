@@ -10,14 +10,14 @@ import lombok.*;
 @AllArgsConstructor
 public class OrderCreateCommand {
 
-    private String name;
+    private long catalogId;
     private String totalPrice;
     private Integer quantity;
     private String address;
 
     public Order newOrder() {
         return Order.builder()
-                .name(getName())
+                .catalogId(getCatalogId())
                 .quantity(getQuantity().toString())
                 .totalPrice(getTotalPrice())
                 .build();

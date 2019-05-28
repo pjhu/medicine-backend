@@ -2,6 +2,7 @@ package com.pjhu.medicine.order.application.service;
 
 import com.pjhu.medicine.common.notification.email.AliyunEmailClient;
 import com.pjhu.medicine.common.notification.email.SendEmailCommand;
+import com.pjhu.medicine.order.adapter.OrderCatalogAdapter;
 import com.pjhu.medicine.order.domain.model.Order;
 import com.pjhu.medicine.order.domain.model.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,14 +20,13 @@ public class OrderManager {
 
     private final OrderRepository orderRepository;
     private final AliyunEmailClient emailClient;
+    private final OrderCatalogAdapter catalogAdapter;
 
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional(readOnly = true)
     public Order getOrder(String id) {
         return Order.builder()
-                .name("name")
-                .quantity("short description")
-                .totalPrice("long description")
+                .totalPrice("123")
                 .build();
     }
 
@@ -35,6 +35,7 @@ public class OrderManager {
     public Long create(OrderCreateCommand command) {
         SecurityContext context = SecurityContextHolder.getContext();
         Order order = command.newOrder();
+        catalogAdapter.getCatalogBy(command.getCatalogId());
         orderRepository.save(order);
         SendEmailCommand emailCommand = SendEmailCommand.builder()
                 .accountName("account name")

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +31,11 @@ public class CatalogManager {
                 .map(catalogRepository::save)
                 .collect(Collectors.toList());
         log.info("Imported [{}] catalog from the excel.", result.size());
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Catalog> getCatalogBy(long id) {
+        return catalogRepository.findById(id);
     }
 
     private Catalog upsertCatalogByData(ItemData itemData) {

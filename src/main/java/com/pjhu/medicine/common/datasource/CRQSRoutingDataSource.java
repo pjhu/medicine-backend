@@ -18,8 +18,10 @@ public class CRQSRoutingDataSource extends AbstractRoutingDataSource {
     @Override
     protected Object determineCurrentLookupKey() {
         if (TransactionSynchronizationManager.isCurrentTransactionReadOnly()) {
+            log.info("current is Slave datasource");
             return DataSourceType.SLAVE;
         }
+        log.info("current is Master datasource");
         return DataSourceType.MASTER;
     }
 }

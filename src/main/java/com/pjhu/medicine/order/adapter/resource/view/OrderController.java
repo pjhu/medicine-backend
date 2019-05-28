@@ -29,7 +29,6 @@ public class OrderController {
     public OrderResponse getOrder(@PathVariable("id") String id) {
         Order order = orderManager.getOrder(id);
         return OrderResponse.builder()
-                .name(order.getName())
                 .totalPrice(order.getTotalPrice())
                 .build();
     }

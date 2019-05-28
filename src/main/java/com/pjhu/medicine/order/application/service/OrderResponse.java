@@ -7,6 +7,5 @@ import lombok.Getter;
 @Getter
 public class OrderResponse {
 
-    private String name;
     private String totalPrice;
 }

@@ -1,9 +1,7 @@
 package com.pjhu.medicine.catalog.domain.model;
 
 import com.pjhu.medicine.common.domain.model.AbstractEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,6 +11,8 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Catalog extends AbstractEntity {
 
     private String sku;
