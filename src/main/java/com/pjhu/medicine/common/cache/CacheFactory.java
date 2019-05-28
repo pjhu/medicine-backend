@@ -1,4 +1,4 @@
-package com.pjhu.medicine.common.utils.cache;
+package com.pjhu.medicine.common.cache;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

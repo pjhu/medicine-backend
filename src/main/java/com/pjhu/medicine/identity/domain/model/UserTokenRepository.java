@@ -1,6 +1,6 @@
 package com.pjhu.medicine.identity.domain.model;
 
-import com.pjhu.medicine.common.utils.cache.UserMeta;
+import com.pjhu.medicine.common.cache.UserMeta;
 import com.pjhu.medicine.identity.utils.UuidHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

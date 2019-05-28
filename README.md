@@ -1,19 +1,17 @@
 ## 1. 开发环境
 
 - JDK环境：JDK 1.8
-- Docker环境：mysql 5.7, redis 4.0.11
 - 使用 Intellij IDEA 的 import 导入该项目
 - 使用 ./gradlew 执行 gradle 任务
 
 
 ## 2. 技术栈
 
-- Spring boot 2.0.4.RELEASE
-- Gradle 4.8.1
+- Spring boot
+- Gradle
 - Spring MVC
 - Spring Security
 - Flyway
-- Jooq 3.11.2
 
 ## 3. 初次运行
 
@@ -34,6 +32,7 @@ docker-compose up -d
 
 ```
 psql -h postgres -U postgres
+psql -U postgres
 密码在docker-compose.yml中
 ```
 

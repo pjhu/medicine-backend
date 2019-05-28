@@ -1,8 +1,8 @@
 package com.pjhu.medicine.identity.handler;
 
 import com.pjhu.medicine.identity.domain.model.UserTokenRepository;
-import com.pjhu.medicine.common.utils.cache.RedisNamespace;
-import com.pjhu.medicine.common.utils.cache.UserMeta;
+import com.pjhu.medicine.common.cache.RedisNamespace;
+import com.pjhu.medicine.common.cache.UserMeta;
 import com.pjhu.medicine.common.utils.SuppressObjectMapper;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpHeaders;

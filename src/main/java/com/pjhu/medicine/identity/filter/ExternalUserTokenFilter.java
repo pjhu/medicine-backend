@@ -1,8 +1,8 @@
 package com.pjhu.medicine.identity.filter;
 
-import com.pjhu.medicine.common.utils.cache.RedisNamespace;
+import com.pjhu.medicine.common.cache.RedisNamespace;
 import com.pjhu.medicine.identity.domain.model.UserTokenRepository;
-import com.pjhu.medicine.common.utils.cache.UserMeta;
+import com.pjhu.medicine.common.cache.UserMeta;
 import com.pjhu.medicine.identity.utils.AuthenticationUtil;
 import com.pjhu.medicine.identity.utils.TokenType;
 import lombok.extern.slf4j.Slf4j;

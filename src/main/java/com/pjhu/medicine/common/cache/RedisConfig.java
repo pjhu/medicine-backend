@@ -1,4 +1,4 @@
-package com.pjhu.medicine.common.utils.cache;
+package com.pjhu.medicine.common.cache;
 
 import lombok.Getter;
 import lombok.Setter;

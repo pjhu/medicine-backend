@@ -1,20 +1,13 @@
-package com.pjhu.medicine;
+package com.pjhu.medicine.common.notification.email;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import com.pjhu.medicine.common.notification.email.AliyunEmailConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class MedicineApplicationContext {
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+public class AliyunContext {
 
     @Bean
     public DefaultAcsClient aliyunEmailTemplate(AliyunEmailConfig config) {
