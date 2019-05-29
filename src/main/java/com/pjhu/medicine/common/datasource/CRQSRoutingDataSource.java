@@ -5,7 +5,6 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 public class CRQSRoutingDataSource extends AbstractRoutingDataSource {

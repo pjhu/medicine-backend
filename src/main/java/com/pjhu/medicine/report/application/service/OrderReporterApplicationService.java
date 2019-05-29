@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OrderReporter {
+public class OrderReporterApplicationService {
 
     private final OrderReportRepository orderReportRepository;
 

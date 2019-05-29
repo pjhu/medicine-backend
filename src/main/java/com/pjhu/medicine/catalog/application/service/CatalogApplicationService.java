@@ -1,5 +1,6 @@
 package com.pjhu.medicine.catalog.application.service;
 
+import com.pjhu.medicine.catalog.application.service.command.BatchUpdateCommand;
 import com.pjhu.medicine.catalog.domain.model.Catalog;
 import com.pjhu.medicine.catalog.domain.model.CatalogRepository;
 import com.pjhu.medicine.catalog.domain.model.ItemData;
@@ -11,13 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CatalogManager {
+public class CatalogApplicationService {
 
     private final ItemDataParser<MultipartFile> itemDataParser;
     private final CatalogRepository catalogRepository;
@@ -31,11 +31,6 @@ public class CatalogManager {
                 .map(catalogRepository::save)
                 .collect(Collectors.toList());
         log.info("Imported [{}] catalog from the excel.", result.size());
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<Catalog> getCatalogBy(long id) {
-        return catalogRepository.findById(id);
     }
 
     private Catalog upsertCatalogByData(ItemData itemData) {

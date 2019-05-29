@@ -1,4 +1,4 @@
-package com.pjhu.medicine.order.application.service;
+package com.pjhu.medicine.order.application.service.command;
 
 import com.pjhu.medicine.order.domain.model.Order;
 import lombok.*;

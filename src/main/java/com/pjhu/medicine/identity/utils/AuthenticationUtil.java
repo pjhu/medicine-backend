@@ -12,7 +12,6 @@ import java.util.List;
 
 public class AuthenticationUtil {
 
-    public static final String ROLE_PREFIX = "ROLE_";
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
     private AuthenticationUtil() {
@@ -31,7 +30,7 @@ public class AuthenticationUtil {
     private static List<GrantedAuthority> createAuthorities(String role) {
         return StringUtils.isBlank(role) ?
                 Collections.emptyList() :
-                Collections.singletonList(new SimpleGrantedAuthority(ROLE_PREFIX + role));
+                Collections.singletonList(new SimpleGrantedAuthority(role));
     }
 
     public static String tokenExtract(String header, TokenType tokenType) {

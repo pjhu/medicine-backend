@@ -1,4 +1,4 @@
-package com.pjhu.medicine.order.application.service;
+package com.pjhu.medicine.order.application.service.response;
 
 import lombok.Builder;
 import lombok.Getter;

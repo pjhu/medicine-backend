@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.pjhu.medicine.common.utils.SecurityContext.ROLE_PREFIX;
+
 @Slf4j
 public class AdminTokenFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -49,7 +51,8 @@ public class AdminTokenFilter extends AbstractAuthenticationProcessingFilter {
 
         if (userMeta != null) {
             userTokenRepository.refresh(RedisNamespace.ADMIN_NAME_SPACE, tokenUuid);
-            Authentication authentication = AuthenticationUtil.create(userMeta.getUsername(), userMeta.getRole());
+            Authentication authentication = AuthenticationUtil.create(userMeta.getUsername(),
+                    ROLE_PREFIX + userMeta.getRole());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         chain.doFilter(req, res);
