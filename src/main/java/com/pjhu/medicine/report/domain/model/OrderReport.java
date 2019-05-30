@@ -7,13 +7,13 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-import static com.pjhu.medicine.report.domain.model.Order.*;
+import static com.pjhu.medicine.report.domain.model.OrderReport.*;
 
 @Builder
 @Getter
 @JsonPropertyOrder(value = {COLUMN_NAME, COLUMN_QUANTITY, COLUMN_TOTAL_PRICE, COLUMN_CREATED_BY,
         COLUMN_CREATED_AT, COLUMN_LAST_MODIFIED_BY, COLUMN_LAST_MODIFIED_AT})
-public class Order {
+public class OrderReport {
 
     static final String COLUMN_NAME = "name";
     static final String COLUMN_QUANTITY = "quantity";

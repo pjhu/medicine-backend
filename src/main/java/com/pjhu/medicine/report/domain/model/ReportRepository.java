@@ -2,7 +2,7 @@ package com.pjhu.medicine.report.domain.model;
 
 import java.util.List;
 
-public interface OrderReportRepository {
+public interface ReportRepository {
 
-    List<Order> findAllOrders();
+    List<OrderReport> findAllOrders();
 }

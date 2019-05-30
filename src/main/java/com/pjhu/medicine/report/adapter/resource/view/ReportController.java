@@ -2,8 +2,8 @@ package com.pjhu.medicine.report.adapter.resource.view;
 
 import com.pjhu.medicine.report.adapter.resource.ResponseCreator;
 import com.pjhu.medicine.report.application.service.ReportAssembler;
-import com.pjhu.medicine.report.domain.model.Order;
-import com.pjhu.medicine.report.application.service.OrderReporterApplicationService;
+import com.pjhu.medicine.report.domain.model.OrderReport;
+import com.pjhu.medicine.report.application.service.ReporterApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +20,13 @@ import static com.pjhu.medicine.identity.utils.Constant.ROOT;
 @RequiredArgsConstructor
 public class ReportController {
 
-    private final OrderReporterApplicationService orderReporterApplicationService;
+    private final ReporterApplicationService reporterApplicationService;
     private final ReportAssembler reportAssembler;
 
     @GetMapping(value = "/orders")
     public ResponseEntity<byte[]> orders() {
-        List<Order> allOrders = orderReporterApplicationService.findAllOrders();
-        byte[] data = reportAssembler.assemble(allOrders, Order.class);
+        List<OrderReport> allOrderReports = reporterApplicationService.findAllOrders();
+        byte[] data = reportAssembler.assemble(allOrderReports, OrderReport.class);
         return ResponseCreator.createAttachmentResponse("order.csv", data);
     }
 }

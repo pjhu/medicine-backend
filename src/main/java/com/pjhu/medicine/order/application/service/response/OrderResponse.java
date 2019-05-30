@@ -7,5 +7,6 @@ import lombok.Getter;
 @Getter
 public class OrderResponse {
 
+    private long orderId;
     private String totalPrice;
 }

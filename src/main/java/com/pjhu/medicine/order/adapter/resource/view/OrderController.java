@@ -5,6 +5,8 @@ import com.pjhu.medicine.order.application.service.command.OrderCreateCommand;
 import com.pjhu.medicine.order.application.service.OrderApplicationService;
 import com.pjhu.medicine.order.application.service.response.OrderResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -25,6 +27,12 @@ public class OrderController {
     @GetMapping("/{id}")
     public OrderResponse getOrder(@PathVariable("id") Long id) {
         return orderQueryService.getOrder(id);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<OrderResponse>> getOrderByPage(Pageable pageable) {
+        Page<OrderResponse> page = orderQueryService.getOrderByPage(pageable);
+        return ResponseEntity.ok(page);
     }
 
     @PostMapping
