@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.EntityListeners;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,7 +16,10 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @ToString(callSuper = true)
-public abstract class AbstractEntity extends Identifiable {
+public abstract class AbstractEntity {
+
+    @Id
+    private Long id;
     @CreatedBy
     private String createdBy;
     @CreatedDate
@@ -24,6 +28,14 @@ public abstract class AbstractEntity extends Identifiable {
     private String lastModifiedBy;
     @LastModifiedDate
     private LocalDateTime lastModifiedAt;
+
+    public AbstractEntity() {
+        this.id = IdGenerator.nextIdentity();
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public void forceUpdateForAuditing() {
         this.lastModifiedAt = LocalDateTime.now();

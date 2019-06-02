@@ -27,28 +27,13 @@ public class CatalogApplicationService {
         List<ItemData> parse = itemDataParser.parse(command.getFile());
 
         List<Catalog> result = parse.stream()
-                .map(this::upsertCatalogByData)
+                .map(e -> {
+                    List<Catalog> existingList = catalogRepository.findAllBySku(e.getSku());
+                    Catalog catalog = new Catalog();
+                    return catalog.upsert(existingList, e);
+                })
                 .map(catalogRepository::save)
                 .collect(Collectors.toList());
         log.info("Imported [{}] catalog from the excel.", result.size());
-    }
-
-    private Catalog upsertCatalogByData(ItemData itemData) {
-        log.info("Updating a catalog with code [{}].", itemData.getSku());
-        List<Catalog> existingList = catalogRepository.findAllBySku(itemData.getSku());
-        Catalog entity;
-        switch (existingList.size()) {
-            case 0:
-                entity = itemData.newCatalog();
-                break;
-            case 1:
-                Catalog catalog = existingList.get(0);
-                catalog.update(itemData);
-                entity = catalog;
-                break;
-            default:
-                throw new RuntimeException();
-        }
-        return entity;
     }
 }

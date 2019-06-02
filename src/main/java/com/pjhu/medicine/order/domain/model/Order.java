@@ -11,11 +11,22 @@ import javax.persistence.Table;
 @Builder
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Order extends AbstractEntity {
 
     private long catalogId;
-    private String quantity;
+    private Integer quantity;
     private String totalPrice;
+
+    @Builder
+    public Order(long catalogId, Integer quantity, String totalPrice) {
+        super();
+        this.catalogId = catalogId;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
+
+    public Order placeOrder(long catalogId, Integer quantity, String totalPrice) {
+        return new Order(catalogId, quantity, totalPrice);
+    }
 }

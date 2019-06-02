@@ -1,16 +1,11 @@
 package com.pjhu.medicine.common.domain.model;
 
-import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.IdentifierGenerator;
-
-import java.io.Serializable;
 import java.net.NetworkInterface;
 import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.Enumeration;
 
-public class IdGenerator implements IdentifierGenerator {
+public class IdGenerator {
 
     private static final int TOTAL_BITS = 64;
     private static final int EPOCH_BITS = 42;
@@ -25,14 +20,22 @@ public class IdGenerator implements IdentifierGenerator {
     private volatile long lastTimestamp = -1L;
     private volatile long sequence = 0L;
 
-    @Override
-    public Serializable generate(SharedSessionContractImplementor session, Object object)
-            throws HibernateException {
-        int nodeId = createNodeId();
-        return nextId(nodeId);
+    private static IdGenerator snowFlake;
+
+    static {
+        snowFlake = new IdGenerator();
     }
 
-    private synchronized long nextId(int nodeId) {
+    public static synchronized long nextIdentity(){
+        return snowFlake.generate();
+    }
+
+    private long generate() {
+        int nodeId = createNodeId();
+        return createNextId(nodeId);
+    }
+
+    private synchronized long createNextId(int nodeId) {
         long currentTimestamp = timestamp();
         if(currentTimestamp < lastTimestamp) {
             throw new IllegalStateException("Invalid System Clock!");
@@ -86,8 +89,6 @@ public class IdGenerator implements IdentifierGenerator {
     }
 
     public static void main(String[] args) {
-        IdGenerator idGenerator = new IdGenerator();
-        int nodeId = idGenerator.createNodeId();
-        System.out.println(idGenerator.nextId(nodeId));
+        System.out.println(IdGenerator.nextIdentity());
     }
 }

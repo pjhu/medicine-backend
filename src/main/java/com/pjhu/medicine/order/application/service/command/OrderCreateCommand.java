@@ -1,7 +1,10 @@
 package com.pjhu.medicine.order.application.service.command;
 
-import com.pjhu.medicine.order.domain.model.Order;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @Getter
@@ -14,12 +17,4 @@ public class OrderCreateCommand {
     private String totalPrice;
     private Integer quantity;
     private String address;
-
-    public Order newOrder() {
-        return Order.builder()
-                .catalogId(getCatalogId())
-                .quantity(getQuantity().toString())
-                .totalPrice(getTotalPrice())
-                .build();
-    }
 }

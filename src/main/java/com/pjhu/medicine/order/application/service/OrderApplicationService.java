@@ -22,9 +22,10 @@ public class OrderApplicationService {
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public Long create(OrderCreateCommand command) {
-        Order order = command.newOrder();
+        Order order = new Order();
         CatalogDto catalogDto = catalogAdapter.getCatalogBy(command.getCatalogId());
-        Order newOrder = orderRepository.save(order);
+        Order placeOrder = order.placeOrder(command.getCatalogId(), command.getQuantity(), command.getTotalPrice());
+        Order newOrder = orderRepository.save(placeOrder);
         return newOrder.getId();
     }
 }

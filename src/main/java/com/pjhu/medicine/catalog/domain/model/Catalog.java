@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "catalog")
@@ -21,10 +22,23 @@ public class Catalog extends AbstractEntity {
     private String note;
     private Long stock;
 
-    public void update(ItemData itemData) {
-        this.name = itemData.getName();
-        this.description = itemData.getDescription();
-        this.note = itemData.getNote();
-        this.stock = itemData.getStock();
+    public Catalog upsert(List<Catalog> existingList, ItemData itemData) {
+        Catalog entity;
+        switch (existingList.size()) {
+            case 0:
+                entity = itemData.newCatalog();
+                break;
+            case 1:
+                Catalog catalog = existingList.get(0);
+                this.name = itemData.getName();
+                this.description = itemData.getDescription();
+                this.note = itemData.getNote();
+                this.stock = itemData.getStock();
+                entity = catalog;
+                break;
+            default:
+                throw new RuntimeException();
+        }
+        return entity;
     }
 }
