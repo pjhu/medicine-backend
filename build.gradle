@@ -13,57 +13,62 @@ plugins {
     id "org.flywaydb.flyway" version "5.2.4"
 }
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'org.flywaydb.flyway'
-
-group = 'com.pjhu'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile("org.springframework.boot:spring-boot-starter-security")
-    compile("org.springframework.ldap:spring-ldap-core")
-    compile("org.springframework.security:spring-security-ldap")
-    compile("org.springframework:spring-tx")
-    compile("com.unboundid:unboundid-ldapsdk")
-    compile('org.springframework.boot:spring-boot-starter-data-redis')
-    compile('redis.clients:jedis')
+allprojects {
+    apply plugin: 'java'
 
-    compile('org.projectlombok:lombok')
-    compile('com.h2database:h2')
-    compile('org.postgresql:postgresql:42.2.2')
-
-    compile('com.google.guava:guava:23.5-jre')
-    compile('org.apache.commons:commons-lang3:3.8')
-
-    compile('org.apache.poi:poi-ooxml:4.0.0')
-    compile('com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.8')
-    compile('commons-io:commons-io:2.6')
-    compile('org.apache.tika:tika-core:1.20')
-
-    // flyway migrate
-    compile('org.flywaydb:flyway-core')
-
-    // aliyun email
-    compile files('libs/aliyun-java-sdk-core-3.0.0.jar')
-    compile files('libs/aliyun-java-sdk-dm-3.1.0.jar')
-
-    // test
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile("org.springframework.security:spring-security-test")
+    repositories {
+        mavenCentral()
+    }
 }
 
-flyway {
-    url = 'jdbc:postgresql://localhost:55432/medicine'
-    user = 'postgres'
-    password = '123'
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.flywaydb.flyway'
+
+    group = 'com.pjhu'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '1.8'
+
+    dependencies {
+        compile('org.springframework.boot:spring-boot-starter-data-jpa')
+        compile('org.springframework.boot:spring-boot-starter-web')
+        compile("org.springframework.boot:spring-boot-starter-security")
+        compile("org.springframework.ldap:spring-ldap-core")
+        compile("org.springframework.security:spring-security-ldap")
+        compile("org.springframework:spring-tx")
+        compile("com.unboundid:unboundid-ldapsdk")
+        compile('org.springframework.boot:spring-boot-starter-data-redis')
+        compile('redis.clients:jedis')
+
+        compile('org.projectlombok:lombok')
+        compile('com.h2database:h2')
+        compile('org.postgresql:postgresql:42.2.2')
+
+        compile('com.google.guava:guava:23.5-jre')
+        compile('org.apache.commons:commons-lang3:3.8')
+
+        compile('org.apache.poi:poi-ooxml:4.0.0')
+        compile('com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.8')
+        compile('commons-io:commons-io:2.6')
+        compile('org.apache.tika:tika-core:1.20')
+
+        // flyway migrate
+        compile('org.flywaydb:flyway-core')
+
+        // test
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+        testCompile("org.springframework.security:spring-security-test")
+    }
 }
+
+bootJar.enabled = false
+jar.enabled = true

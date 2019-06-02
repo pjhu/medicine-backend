@@ -1,0 +1,13 @@
+dependencies {
+    compile(project(":catalog"))
+    compile(project(":common"))
+    compile(project(":identity"))
+    compile(project(":order"))
+    compile(project(":report"))
+}
+
+flyway {
+    url = 'jdbc:postgresql://127.0.0.1:15432/medicine'
+    user = 'postgres'
+    password = '123'
+}
