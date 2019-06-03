@@ -1,3 +1,6 @@
+apply plugin: 'org.flywaydb.flyway'
+apply plugin: 'org.springframework.boot'
+
 dependencies {
     compile(project(":catalog"))
     compile(project(":common"))

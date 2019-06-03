@@ -4,8 +4,8 @@ pluginManagement {
     }
 }
 rootProject.name = 'medicine'
-include 'catalog'
 include 'common'
+include 'catalog'
 include 'identity'
 include 'order'
 include 'report'
