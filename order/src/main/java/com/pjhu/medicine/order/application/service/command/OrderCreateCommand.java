@@ -13,8 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class OrderCreateCommand {
 
-    private long catalogId;
-    private String totalPrice;
+    private Long productId;
+    private String sku;
     private Integer quantity;
     private String address;
 }

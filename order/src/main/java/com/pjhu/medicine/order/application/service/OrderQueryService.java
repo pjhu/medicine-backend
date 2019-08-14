@@ -25,7 +25,7 @@ public class OrderQueryService {
         return order
                 .map(e -> OrderResponse.builder()
                         .orderId(e.getId())
-                        .totalPrice(e.getTotalPrice())
+                        .totalPrice(e.getOrderAmountTotal())
                         .build())
                 .orElse(OrderResponse.builder().build());
     }
@@ -36,7 +36,7 @@ public class OrderQueryService {
         Page<Order> orderPage = orderQueryRepository.findAll(pageable);
         return orderPage.map(e -> OrderResponse.builder()
                 .orderId(e.getId())
-                .totalPrice(e.getTotalPrice())
+                .totalPrice(e.getOrderAmountTotal())
                 .build());
     }
 }

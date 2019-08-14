@@ -8,5 +8,5 @@ import lombok.Getter;
 public class OrderResponse {
 
     private long orderId;
-    private String totalPrice;
+    private Integer totalPrice;
 }

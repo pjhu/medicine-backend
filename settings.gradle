@@ -5,7 +5,7 @@ pluginManagement {
 }
 rootProject.name = 'medicine'
 include 'common'
-include 'catalog'
+include 'product'
 include 'identity'
 include 'order'
 include 'report'

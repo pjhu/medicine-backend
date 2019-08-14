@@ -2,7 +2,7 @@ apply plugin: 'org.flywaydb.flyway'
 apply plugin: 'org.springframework.boot'
 
 dependencies {
-    compile(project(":catalog"))
+    compile(project(":product"))
     compile(project(":common"))
     compile(project(":identity"))
     compile(project(":order"))
