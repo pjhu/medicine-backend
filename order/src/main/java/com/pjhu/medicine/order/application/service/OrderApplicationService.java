@@ -26,7 +26,7 @@ public class OrderApplicationService {
 
     @PreAuthorize("hasRole('ADMIN')")
     @Transactional
-    public Long create(OrderCreateCommand command) {
+    public Long placeOrder(OrderCreateCommand command) {
         Order order = new Order();
         ProductDto productDto = productServiceAdapter.getProductBy(command.getProductId(), command.getSku());
         OrderProductDetail orderProductDetail = new OrderProductDetail(command.getSku(),
@@ -34,6 +34,6 @@ public class OrderApplicationService {
         Order placeOrder = order.placeOrder(command.getQuantity(), productDto.getPrice(),
                 productDto.getPrice(), Collections.singletonList(orderProductDetail));
         orderRepository.save(placeOrder);
-        return order.getId();
+        return placeOrder.getId();
     }
 }

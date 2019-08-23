@@ -29,12 +29,15 @@ public class Order extends AbstractEntity {
     private PayChannel payChannel;
     @Enumerated(value = EnumType.STRING)
     private OrderStatus orderStatus;
+    @Enumerated(value = EnumType.STRING)
+    private OrderPaymentStatus orderPaymentStatus;
 
     @Builder
     public Order(Integer productCount, Integer productAmountTotal,
                  Integer orderAmountTotal, List<OrderProductDetail> orderProductDetails) {
         super();
         this.orderStatus = OrderStatus.UN_PAYED;
+        this.orderPaymentStatus = OrderPaymentStatus.UN_PAYED;
         this.payChannel = PayChannel.ALI_PAY;
         this.productCount = productCount;
         this.productAmountTotal = productAmountTotal;

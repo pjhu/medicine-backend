@@ -7,6 +7,7 @@ import com.pjhu.medicine.order.application.service.response.OrderResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -36,12 +37,9 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody OrderCreateCommand command) {
-        Long orderId = orderApplicationService.create(command);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(orderId).toUri();
-        return ResponseEntity.created(uri).build();
+    public ResponseEntity<Object> placeOrder(@RequestBody OrderCreateCommand command) {
+        Long orderId = orderApplicationService.placeOrder(command);
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
     }
 
 }
