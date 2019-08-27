@@ -49,6 +49,7 @@ docker exec medicine-openldap ldapsearch -x -H ldap://localhost -b dc=pjhu,dc=or
 ```
 
 ##### rabbitmq
+```http://localhost:15672```
 目前会自动创建消息队列
 
 ##### git commit conventions
