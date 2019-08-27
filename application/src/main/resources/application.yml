@@ -36,6 +36,8 @@ spring:
 logging:
   level:
     org:
+      springframework:
+        web: DEBUG
       hibernate:
         SQL: DEBUG
         type:
@@ -57,3 +59,4 @@ aliyun:
 redis:
   host: localhost
   port: 56379
+

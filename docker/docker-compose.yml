@@ -26,6 +26,13 @@ services:
     ports:
       - "56379:6379"
 
+  rabbitmq:
+    image: rabbitmq:3.8-rc-management
+    container_name: medicine-rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+
   openldap:
     image: osixia/openldap:1.2.3
     container_name: medicine-openldap

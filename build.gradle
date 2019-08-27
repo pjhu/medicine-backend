@@ -61,6 +61,7 @@ subprojects {
 
         compile('com.google.guava:guava:23.5-jre')
         compile('org.apache.commons:commons-lang3:3.8')
+        compile('com.google.code.gson:gson:2.7')
 
         compile('org.apache.poi:poi-ooxml:4.0.0')
         compile('com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.8')

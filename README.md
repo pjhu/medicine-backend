@@ -36,7 +36,6 @@ psql -U postgres
 密码在docker-compose.yml中
 ```
 
-
 ### Ldap
 ```$xslt
 login: http://0.0.0.0:5080/phpldapadmin
@@ -49,6 +48,8 @@ login pass: 123
 docker exec medicine-openldap ldapsearch -x -H ldap://localhost -b dc=pjhu,dc=org -D "cn=admin,dc=pjhu,dc=org" -w 123
 ```
 
+##### rabbitmq
+目前会自动创建消息队列
 
 ##### git commit conventions
 config username: use firstnamelastname
