@@ -1,4 +1,4 @@
-package com.pjhu.medicine.delaytask.application.adapter.resouce.view;
+package com.pjhu.medicine.delaytask.adapter.resouce.view;
 
 import com.pjhu.medicine.delaytask.application.service.DelayTaskApplication;
 import com.pjhu.medicine.delaytask.application.service.SendMessage;

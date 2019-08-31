@@ -1,6 +1,6 @@
 package com.pjhu.medicine.delaytask.application.service;
 
-import com.pjhu.medicine.delaytask.application.adapter.persisitence.RabbitAdapter;
+import com.pjhu.medicine.delaytask.adapter.persistence.RabbitAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

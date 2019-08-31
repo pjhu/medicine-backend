@@ -59,4 +59,3 @@ aliyun:
 redis:
   host: localhost
   port: 56379
-

@@ -1,4 +1,4 @@
-package com.pjhu.medicine.delaytask.application.adapter.persisitence;
+package com.pjhu.medicine.delaytask.adapter.persistence;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

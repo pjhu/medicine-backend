@@ -1,4 +1,4 @@
-package com.pjhu.medicine.delaytask.application.config;
+package com.pjhu.medicine.delaytask.config;
 
 import com.pjhu.medicine.delaytask.application.service.RabbitConstants;
 import lombok.extern.slf4j.Slf4j;

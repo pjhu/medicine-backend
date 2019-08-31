@@ -8,6 +8,7 @@ dependencies {
     compile(project(":order"))
     compile(project(":report"))
     compile(project(":delaytask"))
+    compile(project(":cms"))
 }
 
 flyway {
