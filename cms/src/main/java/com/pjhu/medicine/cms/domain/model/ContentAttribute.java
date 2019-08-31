@@ -12,8 +12,6 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ContentAttribute {
 
-    private Long contentId;
-    private Integer publishedVersion;
-    private String key;
+    private String name;
     private String value;
 }

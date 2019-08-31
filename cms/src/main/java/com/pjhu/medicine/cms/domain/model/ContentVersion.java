@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ContentVersion extends AbstractEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "content_id")
     private Content content;
 
@@ -33,4 +33,10 @@ public class ContentVersion extends AbstractEntity {
             joinColumns = @JoinColumn(name = "content_version_id")
     )
     private List<ContentAttribute> contentAttributes = new ArrayList<>();
+
+    public ContentVersion(Content content, List<ContentAttribute> contentAttributes) {
+        this.content = content;
+        this.contentStatus = ContentStatus.DRAFT;
+        this.contentAttributes.addAll(contentAttributes);
+    }
 }

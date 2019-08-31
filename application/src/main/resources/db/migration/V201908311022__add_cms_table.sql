@@ -1,6 +1,7 @@
 CREATE TABLE content (
   id BIGINT NOT NULL,
   content_type VARCHAR(255),
+  content_status VARCHAR(255),
   published_version BIGINT,
   created_at TIMESTAMP,
   created_by VARCHAR(255),
@@ -24,10 +25,8 @@ CREATE TABLE content_version (
 );
 
 CREATE TABLE content_attribute (
-  content_id BIGINT,
   content_version_id BIGINT,
-  published_version BIGINT,
-  key VARCHAR(255),
+  name VARCHAR(255),
   value VARCHAR(255)
 );
 
