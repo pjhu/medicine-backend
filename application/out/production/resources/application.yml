@@ -36,6 +36,8 @@ spring:
 logging:
   level:
     org:
+      springframework:
+        web: DEBUG
       hibernate:
         SQL: DEBUG
         type:
