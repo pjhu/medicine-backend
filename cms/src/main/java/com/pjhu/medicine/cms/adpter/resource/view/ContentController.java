@@ -1,9 +1,14 @@
 package com.pjhu.medicine.cms.adpter.resource.view;
 
 import com.pjhu.medicine.cms.application.service.ContentApplicationService;
+import com.pjhu.medicine.cms.application.service.ContentQueryService;
 import com.pjhu.medicine.cms.application.service.command.ContentCreateCommand;
 import com.pjhu.medicine.cms.application.service.command.ContentUpdateCommand;
+import com.pjhu.medicine.cms.application.service.response.ContentResponse;
+import com.pjhu.medicine.cms.domain.model.ContentType;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +21,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 public class ContentController {
 
     private final ContentApplicationService contentApplicationService;
+    private final ContentQueryService contentQueryService;
 
     @PostMapping
     public ResponseEntity<Long> create(@RequestBody ContentCreateCommand contentCreateCommand) {
@@ -48,5 +54,10 @@ public class ContentController {
     public ResponseEntity<Object> delete(@PathVariable Long contentId) {
         contentApplicationService.delete(contentId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public Page<ContentResponse> findContentsBy(String contentType, Pageable pageable) {
+        return contentQueryService.findContentsForAdmin(ContentType.valueOf(contentType), pageable);
     }
 }

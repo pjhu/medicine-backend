@@ -10,4 +10,6 @@ public interface ContentQueryRepository {
     Optional<Content> getOrderBy(long id);
 
     Page<Content> findAll(Pageable pageable);
+
+    Page<ContentWithAttribute> findAllForAdmin(ContentType contentType, Pageable pageable);
 }

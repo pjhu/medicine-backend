@@ -6,6 +6,7 @@ import com.pjhu.medicine.cms.domain.model.Content;
 import com.pjhu.medicine.cms.domain.model.ContentAttribute;
 import com.pjhu.medicine.cms.domain.model.ContentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,6 +19,7 @@ public class ContentApplicationService {
 
     private final ContentRepository contentRepository;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public Long create(ContentCreateCommand contentCreateCommand) {
         Content content = new Content();
@@ -29,6 +31,7 @@ public class ContentApplicationService {
         return newContent.getId();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public void update(ContentUpdateCommand contentUpdateCommand) {
         Content content = contentRepository.findById(contentUpdateCommand.getContentId())
@@ -39,6 +42,7 @@ public class ContentApplicationService {
         content.update(contentAttributes);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public void publish(Long contentId) {
         Content content = contentRepository.findById(contentId)
@@ -46,6 +50,7 @@ public class ContentApplicationService {
         content.publish();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public void archive(Long contentId) {
         Content content = contentRepository.findById(contentId)
@@ -53,6 +58,7 @@ public class ContentApplicationService {
         content.archive();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public void delete(Long contentId) {
         Content content = contentRepository.findById(contentId)
