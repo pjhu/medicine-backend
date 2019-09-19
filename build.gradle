@@ -48,16 +48,10 @@ subprojects {
         compile('org.springframework.boot:spring-boot-starter-data-jpa')
         compile('org.springframework.boot:spring-boot-starter-web')
         compile("org.springframework.boot:spring-boot-starter-security")
-        compile("org.springframework.ldap:spring-ldap-core")
-        compile("org.springframework.security:spring-security-ldap")
-        compile("org.springframework:spring-tx")
-        compile("com.unboundid:unboundid-ldapsdk")
         compile('org.springframework.boot:spring-boot-starter-data-redis')
         compile('redis.clients:jedis')
 
         compile('org.projectlombok:lombok')
-        compile('com.h2database:h2')
-        compile('org.postgresql:postgresql:42.2.2')
 
         compile('com.google.guava:guava:23.5-jre')
         compile('org.apache.commons:commons-lang3:3.8')
@@ -67,9 +61,6 @@ subprojects {
         compile('com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.8')
         compile('commons-io:commons-io:2.6')
         compile('org.apache.tika:tika-core:1.20')
-
-        // flyway migrate
-        compile('org.flywaydb:flyway-core')
 
         // test
         testCompile('org.springframework.boot:spring-boot-starter-test')

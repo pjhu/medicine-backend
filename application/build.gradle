@@ -9,6 +9,12 @@ dependencies {
     compile(project(":report"))
     compile(project(":delaytask"))
     compile(project(":cms"))
+
+    compile('com.h2database:h2')
+    compile('org.postgresql:postgresql:42.2.2')
+
+    // flyway migrate
+    compile('org.flywaydb:flyway-core')
 }
 
 flyway {
