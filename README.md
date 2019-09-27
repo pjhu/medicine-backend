@@ -4,7 +4,6 @@
 - 使用 Intellij IDEA 的 import 导入该项目
 - 使用 ./gradlew 执行 gradle 任务
 
-
 ## 2. 技术栈
 
 - Spring boot
@@ -18,6 +17,7 @@
 ## Start postgres
 ```$xslt
 cd docker
+docker build -t postgres-test:11.2 . 
 docker-compose up -d
 ```
 
@@ -43,10 +43,16 @@ login DN: cn=admin,dc=pjhu,dc=org
 login pass: 123
 ```
 
+##### create user
+1. create ou "medicine"
+2. create group "medicine-admin"
+3. create user "jinhu peng"
+
 ##### ldap test
 ```$xslt
 docker exec medicine-openldap ldapsearch -x -H ldap://localhost -b dc=pjhu,dc=org -D "cn=admin,dc=pjhu,dc=org" -w 123
 ```
+<!--dn: cn=jinhu peng,cn=medicine-admin,ou=medicine,dc=pjhu,dc=org-->
 
 ##### rabbitmq
 ```http://localhost:15672```

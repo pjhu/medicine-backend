@@ -2,7 +2,6 @@ version: '3'
 services:
   postgres-master:
     image: postgres-test:11.2
-    build: .
     container_name: medicine-postgres-master
     ports:
       - 15432:5432
@@ -10,7 +9,7 @@ services:
       PG_ROLE: master
       POSTGRES_PASSWORD: 123
   postgres-slave:
-    image: postgres-test:1.0
+    image: postgres-test:11.2
     container_name: medicine-postgres-slave
     ports:
       - 25432:5432

@@ -19,7 +19,7 @@ public class LdapClient {
     public boolean authenticate(String username, String credentials) {
         DirContext ctx = null;
         try {
-            String userDn = String.format("cn=%s, ou=medicine, dc=pjhu, dc=org", username);
+            String userDn = String.format("cn=%s, cn=medicine-admin, ou=medicine, dc=pjhu, dc=org", username);
             log.debug("the userDN: {}", userDn);
             ctx = ldapContextSource.getContext(userDn, credentials);
             ctx.lookup(userDn);
