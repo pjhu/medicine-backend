@@ -1,4 +1,4 @@
 dependencies {
-    compile(project(":common"))
-    compile(project(":product"))
+    implementation project(":common")
+    implementation project(":product")
 }

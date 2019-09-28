@@ -33,6 +33,12 @@ subprojects {
     version = '0.0.1-SNAPSHOT'
     sourceCompatibility = '1.8'
 
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
     repositories {
         mavenCentral()
     }
@@ -45,26 +51,27 @@ subprojects {
 
     dependencies {
 
-        compile('org.springframework.boot:spring-boot-starter-data-jpa')
-        compile('org.springframework.boot:spring-boot-starter-web')
-        compile("org.springframework.boot:spring-boot-starter-security")
-        compile('org.springframework.boot:spring-boot-starter-data-redis')
-        compile('redis.clients:jedis')
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation "org.springframework.boot:spring-boot-starter-security"
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+        implementation 'redis.clients:jedis'
 
-        compile('org.projectlombok:lombok')
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
 
-        compile('com.google.guava:guava:23.5-jre')
-        compile('org.apache.commons:commons-lang3:3.8')
-        compile('com.google.code.gson:gson:2.7')
+        implementation'com.google.guava:guava:23.5-jre'
+        implementation'org.apache.commons:commons-lang3:3.8'
+        implementation'com.google.code.gson:gson:2.7'
 
-        compile('org.apache.poi:poi-ooxml:4.0.0')
-        compile('com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.8')
-        compile('commons-io:commons-io:2.6')
-        compile('org.apache.tika:tika-core:1.20')
+        implementation 'org.apache.poi:poi-ooxml:4.0.0'
+        implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.8'
+        implementation 'commons-io:commons-io:2.6'
+        implementation 'org.apache.tika:tika-core:1.20'
 
         // test
-        testCompile('org.springframework.boot:spring-boot-starter-test')
-        testCompile("org.springframework.security:spring-security-test")
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation "org.springframework.security:spring-security-test"
     }
 }
 
