@@ -13,6 +13,7 @@ buildscript {
 plugins {
     id 'org.springframework.boot' version '2.1.2.RELEASE'
     id 'java'
+    id 'groovy'
     id "org.flywaydb.flyway" version "5.2.4"
 }
 
@@ -20,6 +21,7 @@ repositories {
     mavenCentral()
 }
 
+ext.testsResults = []
 allprojects {
     apply plugin: 'idea'
 }
@@ -27,6 +29,7 @@ allprojects {
 subprojects {
 
     apply plugin: 'java'
+    apply plugin: 'groovy'
     apply plugin: 'io.spring.dependency-management'
 
     group = 'com.pjhu'
@@ -71,7 +74,27 @@ subprojects {
 
         // test
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testImplementation "org.springframework.security:spring-security-test"
+        testImplementation 'org.springframework.security:spring-security-test'
+
+        // spock test
+        implementation "org.codehaus.groovy:groovy-all:2.5.7"
+        testImplementation "org.spockframework:spock-core:1.2-groovy-2.4"
+        testImplementation 'org.spockframework:spock-spring:1.2-groovy-2.4'
+        testRuntimeOnly "com.h2database:h2"
+    }
+
+    // Test Logging
+    test {
+        testLogging {
+            afterSuite { desc, result ->
+                if (!desc.parent) {
+                    def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+                    def startItem = '|  ', endItem = '  |'
+                    def repeatLength = startItem.length() + output.length() + endItem.length()
+                    println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+                }
+            }
+        }
     }
 }
 
