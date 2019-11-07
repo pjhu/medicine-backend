@@ -1,9 +1,10 @@
 package com.pjhu.medicine.identity.filter;
 
+import com.pjhu.medicine.identity.domain.model.UserStatus;
+import com.pjhu.medicine.identity.domain.model.external.ExternalUser;
+import com.pjhu.medicine.identity.domain.model.external.ExternalUserRepository;
 import com.pjhu.medicine.common.utils.SuppressObjectMapper;
-import com.pjhu.medicine.identity.adapter.LdapClient;
 import com.pjhu.medicine.identity.adapter.SignInRequest;
-import com.pjhu.medicine.identity.domain.model.Role;
 import com.pjhu.medicine.identity.utils.AuthenticationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -16,17 +17,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-public class AdminLdapProviderFilter extends AbstractAuthenticationProcessingFilter {
+public class ExternalUserProviderFilter extends AbstractAuthenticationProcessingFilter {
 
+    private final ExternalUserRepository externalUserRepository;
     private final SuppressObjectMapper suppressObjectMapper;
-    private final LdapClient ldapClient;
 
-    public AdminLdapProviderFilter(String defaultFilterProcessesUrl,
-                                   SuppressObjectMapper suppressObjectMapper,
-                                   LdapClient ldapClient) {
+    public ExternalUserProviderFilter(String defaultFilterProcessesUrl,
+                                      ExternalUserRepository externalUserRepository,
+                                      SuppressObjectMapper suppressObjectMapper) {
         super(defaultFilterProcessesUrl);
+        this.externalUserRepository = externalUserRepository;
         this.suppressObjectMapper = suppressObjectMapper;
-        this.ldapClient = ldapClient;
     }
 
     @Override
@@ -35,8 +36,10 @@ public class AdminLdapProviderFilter extends AbstractAuthenticationProcessingFil
         String collect = IOUtils.toString(request.getReader());
         SignInRequest signInRequest =
                 suppressObjectMapper.readValue(collect, SignInRequest.class);
-        if (ldapClient.authenticate(signInRequest.getUsername(), signInRequest.getPassword())) {
-            return AuthenticationUtil.create(signInRequest.getUsername(), Role.ADMIN.name());
+        ExternalUser externalUser = externalUserRepository
+                .findByUsernameAndActiveNot(signInRequest.getUsername(), UserStatus.DISABLE);
+        if (externalUser != null) {
+            return AuthenticationUtil.create(signInRequest.getUsername(), externalUser.getRole().name());
         }
         return null;
     }

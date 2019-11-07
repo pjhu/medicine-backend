@@ -12,4 +12,5 @@ include 'report'
 include 'application'
 include 'delaytask'
 include 'cms'
+include 'demo'
 

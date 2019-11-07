@@ -57,9 +57,9 @@ public class UserWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .addFilterBefore(externalUserTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(adminTokenFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(customJdbcProviderFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(externalUserProviderFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(externalUserLogoutFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(ldapProviderFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(adminProviderFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(adminLogoutFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
@@ -71,19 +71,19 @@ public class UserWebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new AdminTokenFilter(new AntPathRequestMatcher(ADMIN_API_PATTERN), userTokenRepository);
     }
 
-    private ExternalUserJdbcProviderFilter customJdbcProviderFilter() {
-        ExternalUserJdbcProviderFilter jdbcProvider =
-                new ExternalUserJdbcProviderFilter(USER_SIGN_IN, externalUserRepository, suppressObjectMapper);
+    private ExternalUserProviderFilter externalUserProviderFilter() {
+        ExternalUserProviderFilter jdbcProvider =
+                new ExternalUserProviderFilter(USER_SIGN_IN, externalUserRepository, suppressObjectMapper);
         jdbcProvider.setAuthenticationSuccessHandler(
                 new ExternalUserLoginSuccessHandler(userTokenRepository, suppressObjectMapper));
         return jdbcProvider;
     }
 
-    private AdminLdapProviderFilter ldapProviderFilter() {
-        AdminLdapProviderFilter ldapProvider = new AdminLdapProviderFilter(ADMIN_SIGN_IN, suppressObjectMapper, ldapClient);
-        ldapProvider.setAuthenticationSuccessHandler(
+    private AdminProviderFilter adminProviderFilter() {
+        AdminProviderFilter adminProvider = new AdminProviderFilter(ADMIN_SIGN_IN, suppressObjectMapper, ldapClient);
+        adminProvider.setAuthenticationSuccessHandler(
                 new AdminLoginSuccessHandler(userTokenRepository, suppressObjectMapper));
-        return ldapProvider;
+        return adminProvider;
     }
 
     private ExternalUserLogoutFilter externalUserLogoutFilter() {

@@ -51,6 +51,7 @@ class ContentControllerTest extends Specification {
         def response = mvc.perform(post('/api/v1/admin/contents')
                 .contentType(APPLICATION_JSON_UTF8_VALUE)
                 .content(objectMapper.writeValueAsString(requestBody)))
+                .andExpect()
 
         then:
         response.andExpect(status().isAccepted())

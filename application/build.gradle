@@ -10,7 +10,7 @@ dependencies {
     implementation project(":delaytask")
     implementation project(":cms")
 
-    runtimeOnly 'com.h2database:h2'
+//    runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.postgresql:postgresql:42.2.2'
 
     // flyway migrate
