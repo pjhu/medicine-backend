@@ -1,6 +1,6 @@
 ## 1. 开发环境
 
-- JDK环境：JDK 1.8
+- JDK环境：JDK 11
 - 使用 Intellij IDEA 的 import 导入该项目
 - 使用 ./gradlew 执行 gradle 任务
 
