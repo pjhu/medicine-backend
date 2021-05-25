@@ -50,12 +50,6 @@ auth:
     token:
       expire: 3600
 
-aliyun:
-  email:
-    region: cn-hangzhou
-    accessKey: accessKey
-    accessSecret: accessSecret
-
 redis:
   host: localhost
   port: 56379
