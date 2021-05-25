@@ -14,10 +14,9 @@
 
 ## 3. 初次运行
 
-## Start postgres
+## Start mysql
 ```$xslt
 cd docker
-docker build -t postgres-test:11.2 . 
 docker-compose up -d
 ```
 
@@ -31,8 +30,7 @@ docker-compose up -d
 ### 用client连接到数据库
 
 ```
-psql -h postgres -U postgres
-psql -U postgres
+mysql -p
 密码在docker-compose.yml中
 ```
 
@@ -53,10 +51,6 @@ login pass: 123
 docker exec medicine-openldap ldapsearch -x -H ldap://localhost -b dc=pjhu,dc=org -D "cn=admin,dc=pjhu,dc=org" -w 123
 ```
 <!--dn: cn=jinhu peng,cn=medicine-admin,ou=medicine,dc=pjhu,dc=org-->
-
-##### rabbitmq
-```http://localhost:15672```
-目前会自动创建消息队列
 
 ##### git commit conventions
 config username: use firstnamelastname

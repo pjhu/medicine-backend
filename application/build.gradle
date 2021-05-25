@@ -10,15 +10,7 @@ dependencies {
     implementation project(":delaytask")
     implementation project(":cms")
 
-//    runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'org.postgresql:postgresql:42.2.2'
-
+    runtimeOnly 'mysql:mysql-connector-java'
     // flyway migrate
     implementation 'org.flywaydb:flyway-core'
-}
-
-flyway {
-    url = 'jdbc:postgresql://127.0.0.1:15432/medicine'
-    user = 'postgres'
-    password = '123'
 }

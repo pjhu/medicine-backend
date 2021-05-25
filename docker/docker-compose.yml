@@ -1,36 +1,22 @@
-version: '3'
+version: "3.5"
 services:
-  postgres-master:
-    image: postgres-test:11.2
-    container_name: medicine-postgres-master
+  mysql:
+    image: mysql:8.0
+    container_name: medicine-mysql
+    volumes:
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - 15432:5432
+      - 13306:3306
     environment:
-      PG_ROLE: master
-      POSTGRES_PASSWORD: 123
-  postgres-slave:
-    image: postgres-test:11.2
-    container_name: medicine-postgres-slave
-    ports:
-      - 25432:5432
-    depends_on:
-      - postgres-master
-    environment:
-      PG_ROLE: slave
-      PG_MASTER_SERVICE_HOST: postgres-master
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=123456
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
 
   redis:
     image: redis:5
     container_name: medicine-redis
     ports:
-      - "56379:6379"
-
-  rabbitmq:
-    image: rabbitmq:3.8-rc-management
-    container_name: medicine-rabbitmq
-    ports:
-      - 5672:5672
-      - 15672:15672
+      - 16379:6379
 
   openldap:
     image: osixia/openldap:1.2.3

@@ -1,0 +1,9 @@
+CREATE DATABASE operator CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE external_user CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE product CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE product_sku CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE user_order CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE order_product_detail CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE content CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE content_version CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE content_attribute CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
