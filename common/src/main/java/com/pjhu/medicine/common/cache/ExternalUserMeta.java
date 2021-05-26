@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserMeta {
+public class ExternalUserMeta {
 
     private String username;
     private String role;

@@ -1,8 +1,8 @@
 package com.pjhu.medicine.identity.filter;
 
-import com.pjhu.medicine.identity.domain.model.UserTokenRepository;
+import com.pjhu.medicine.identity.domain.model.AdminTokenRepository;
 import com.pjhu.medicine.common.cache.RedisNamespace;
-import com.pjhu.medicine.common.cache.UserMeta;
+import com.pjhu.medicine.common.cache.AdminUserMeta;
 import com.pjhu.medicine.identity.utils.AuthenticationUtil;
 import com.pjhu.medicine.identity.utils.TokenType;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +23,12 @@ import static com.pjhu.medicine.common.utils.SecurityContext.ROLE_PREFIX;
 @Slf4j
 public class AdminTokenFilter extends AbstractAuthenticationProcessingFilter {
 
-    private final UserTokenRepository userTokenRepository;
+    private final AdminTokenRepository adminTokenRepository;
 
     public AdminTokenFilter(RequestMatcher requiresAuthenticationRequestMatcher,
-                            UserTokenRepository userTokenRepository) {
+                            AdminTokenRepository adminTokenRepository) {
         super(requiresAuthenticationRequestMatcher);
-        this.userTokenRepository = userTokenRepository;
+        this.adminTokenRepository = adminTokenRepository;
     }
 
     @Override
@@ -47,12 +47,12 @@ public class AdminTokenFilter extends AbstractAuthenticationProcessingFilter {
         }
 
         String tokenUuid = AuthenticationUtil.tokenExtract(requestHeader, TokenType.ADMIN);
-        UserMeta userMeta = userTokenRepository.getBy(RedisNamespace.ADMIN_NAME_SPACE, tokenUuid);
+        AdminUserMeta adminUserMeta = adminTokenRepository.getBy(RedisNamespace.ADMIN_NAME_SPACE, tokenUuid);
 
-        if (userMeta != null) {
-            userTokenRepository.refresh(RedisNamespace.ADMIN_NAME_SPACE, tokenUuid);
-            Authentication authentication = AuthenticationUtil.create(userMeta.getUsername(),
-                    ROLE_PREFIX + userMeta.getRole());
+        if (adminUserMeta != null) {
+            adminTokenRepository.refresh(RedisNamespace.ADMIN_NAME_SPACE, tokenUuid);
+            Authentication authentication = AuthenticationUtil.createAdmin(adminUserMeta.getUsername(),
+                    ROLE_PREFIX + adminUserMeta.getRole());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         chain.doFilter(req, res);

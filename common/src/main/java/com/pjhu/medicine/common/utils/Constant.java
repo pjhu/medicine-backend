@@ -6,8 +6,8 @@ public class Constant {
     public static final String ROOT = "/api/" + VERSION;
     public static final String ADMIN = ROOT + "/admin";
     public static final String USER = ROOT + "/external-user";
-    public static final String USER_SIGN_IN = ROOT + "/auth/external-user/signIn";
-    public static final String USER_SIGN_OUT = ROOT + "/auth/external-user/signOut";
-    public static final String ADMIN_SIGN_IN = ROOT + "/auth/admin/signIn";
-    public static final String ADMIN_SIGN_OUT = ROOT + "/auth/admin/signOut";
+    public static final String USER_SIGN_IN = ROOT + "/auth/external-user/signin";
+    public static final String USER_SIGN_OUT = ROOT + "/auth/external-user/signout";
+    public static final String ADMIN_SIGN_IN = ROOT + "/auth/admin/signin";
+    public static final String ADMIN_SIGN_OUT = ROOT + "/auth/admin/signout";
 }

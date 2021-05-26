@@ -1,5 +1,6 @@
 package com.pjhu.medicine.identity.utils;
 
+import com.pjhu.medicine.identity.domain.model.Role;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,8 +19,17 @@ public class AuthenticationUtil {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Authentication create(String username, String role) {
+    public static Authentication createAdmin(String username, String role) {
         List<GrantedAuthority> authorities = createAuthorities(role);
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(username, StringUtils.EMPTY, authorities);
+        User user = new User(username, StringUtils.EMPTY, authorities);
+        authenticationToken.setDetails(user);
+        return authenticationToken;
+    }
+
+    public static Authentication createExternalUser(String username) {
+        List<GrantedAuthority> authorities = createAuthorities(Role.USER.name());
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(username, StringUtils.EMPTY, authorities);
         User user = new User(username, StringUtils.EMPTY, authorities);

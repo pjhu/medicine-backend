@@ -36,7 +36,7 @@ public class AdminProviderFilter extends AbstractAuthenticationProcessingFilter 
         SignInRequest signInRequest =
                 suppressObjectMapper.readValue(collect, SignInRequest.class);
         if (ldapClient.authenticate(signInRequest.getUsername(), signInRequest.getPassword())) {
-            return AuthenticationUtil.create(signInRequest.getUsername(), Role.ADMIN.name());
+            return AuthenticationUtil.createAdmin(signInRequest.getUsername(), Role.ADMIN.name());
         }
         return null;
     }

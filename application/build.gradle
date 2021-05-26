@@ -7,7 +7,6 @@ dependencies {
     implementation project(":identity")
     implementation project(":order")
     implementation project(":report")
-    implementation project(":delaytask")
     implementation project(":cms")
 
     runtimeOnly 'mysql:mysql-connector-java'

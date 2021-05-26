@@ -1,6 +1,7 @@
 package com.pjhu.medicine.identity;
 
-import com.pjhu.medicine.identity.domain.model.UserTokenRepository;
+import com.pjhu.medicine.identity.domain.model.AdminTokenRepository;
+import com.pjhu.medicine.identity.domain.model.ExternalUserTokenRepository;
 import com.pjhu.medicine.identity.domain.model.external.ExternalUserRepository;
 import com.pjhu.medicine.common.utils.SuppressObjectMapper;
 import com.pjhu.medicine.identity.filter.*;
@@ -30,17 +31,20 @@ public class UserWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final ExternalUserRepository externalUserRepository;
     private final SuppressObjectMapper suppressObjectMapper;
-    private final UserTokenRepository userTokenRepository;
+    private final ExternalUserTokenRepository externalUserTokenRepository;
+    private final AdminTokenRepository adminTokenRepository;
     private final LdapClient ldapClient;
 
     @Autowired
-    public UserWebSecurityConfig(UserTokenRepository userTokenRepository,
+    public UserWebSecurityConfig(ExternalUserTokenRepository externalUserTokenRepository,
                                  ExternalUserRepository externalUserRepository,
                                  SuppressObjectMapper suppressObjectMapper,
+                                 AdminTokenRepository adminTokenRepository,
                                  LdapClient ldapClient) {
         this.externalUserRepository = externalUserRepository;
         this.suppressObjectMapper = suppressObjectMapper;
-        this.userTokenRepository = userTokenRepository;
+        this.externalUserTokenRepository = externalUserTokenRepository;
+        this.adminTokenRepository = adminTokenRepository;
         this.ldapClient = ldapClient;
     }
 
@@ -64,36 +68,36 @@ public class UserWebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private ExternalUserTokenFilter externalUserTokenFilter() {
-        return new ExternalUserTokenFilter(new AntPathRequestMatcher(USER_API_PATTERN), userTokenRepository);
+        return new ExternalUserTokenFilter(new AntPathRequestMatcher(USER_API_PATTERN), externalUserTokenRepository);
     }
 
     private AdminTokenFilter adminTokenFilter() {
-        return new AdminTokenFilter(new AntPathRequestMatcher(ADMIN_API_PATTERN), userTokenRepository);
+        return new AdminTokenFilter(new AntPathRequestMatcher(ADMIN_API_PATTERN), adminTokenRepository);
     }
 
     private ExternalUserProviderFilter externalUserProviderFilter() {
-        ExternalUserProviderFilter jdbcProvider =
+        ExternalUserProviderFilter userProviderFilter =
                 new ExternalUserProviderFilter(USER_SIGN_IN, externalUserRepository, suppressObjectMapper);
-        jdbcProvider.setAuthenticationSuccessHandler(
-                new ExternalUserLoginSuccessHandler(userTokenRepository, suppressObjectMapper));
-        return jdbcProvider;
+        userProviderFilter.setAuthenticationSuccessHandler(
+                new ExternalUserLoginSuccessHandler(externalUserTokenRepository, suppressObjectMapper));
+        return userProviderFilter;
     }
 
     private AdminProviderFilter adminProviderFilter() {
         AdminProviderFilter adminProvider = new AdminProviderFilter(ADMIN_SIGN_IN, suppressObjectMapper, ldapClient);
         adminProvider.setAuthenticationSuccessHandler(
-                new AdminLoginSuccessHandler(userTokenRepository, suppressObjectMapper));
+                new AdminLoginSuccessHandler(adminTokenRepository, suppressObjectMapper));
         return adminProvider;
     }
 
     private ExternalUserLogoutFilter externalUserLogoutFilter() {
-        ExternalUserLogoutFilter logoutFilter = new ExternalUserLogoutFilter(USER_SIGN_OUT, userTokenRepository);
+        ExternalUserLogoutFilter logoutFilter = new ExternalUserLogoutFilter(USER_SIGN_OUT, externalUserTokenRepository);
         logoutFilter.setAuthenticationSuccessHandler(new LogoutSuccessHandler());
         return logoutFilter;
     }
 
     private AdminLogoutFilter adminLogoutFilter() {
-        AdminLogoutFilter logoutFilter = new AdminLogoutFilter(ADMIN_SIGN_OUT, userTokenRepository);
+        AdminLogoutFilter logoutFilter = new AdminLogoutFilter(ADMIN_SIGN_OUT, adminTokenRepository);
         logoutFilter.setAuthenticationSuccessHandler(new LogoutSuccessHandler());
         return logoutFilter;
     }

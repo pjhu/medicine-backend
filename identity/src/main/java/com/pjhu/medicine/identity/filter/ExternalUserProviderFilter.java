@@ -39,7 +39,7 @@ public class ExternalUserProviderFilter extends AbstractAuthenticationProcessing
         ExternalUser externalUser = externalUserRepository
                 .findByUsernameAndActiveNot(signInRequest.getUsername(), UserStatus.DISABLE);
         if (externalUser != null) {
-            return AuthenticationUtil.create(signInRequest.getUsername(), externalUser.getRole().name());
+            return AuthenticationUtil.createExternalUser(signInRequest.getUsername());
         }
         return null;
     }

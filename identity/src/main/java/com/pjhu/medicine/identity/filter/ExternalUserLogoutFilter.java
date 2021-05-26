@@ -1,8 +1,9 @@
 package com.pjhu.medicine.identity.filter;
 
-import com.pjhu.medicine.identity.domain.model.UserTokenRepository;
+import com.pjhu.medicine.common.cache.ExternalUserMeta;
+import com.pjhu.medicine.identity.domain.model.ExternalUserTokenRepository;
 import com.pjhu.medicine.common.cache.RedisNamespace;
-import com.pjhu.medicine.common.cache.UserMeta;
+import com.pjhu.medicine.common.cache.AdminUserMeta;
 import com.pjhu.medicine.identity.utils.AuthenticationUtil;
 import com.pjhu.medicine.identity.utils.TokenType;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class ExternalUserLogoutFilter extends AbstractAuthenticationProcessingFilter {
 
-    private final UserTokenRepository userTokenRepository;
+    private final ExternalUserTokenRepository externalUserTokenRepository;
 
     public ExternalUserLogoutFilter(String defaultFilterProcessesUrl,
-                                    UserTokenRepository userTokenRepository) {
+                                    ExternalUserTokenRepository externalUserTokenRepository) {
         super(defaultFilterProcessesUrl);
-        this.userTokenRepository = userTokenRepository;
+        this.externalUserTokenRepository = externalUserTokenRepository;
     }
 
     @Override
@@ -32,10 +33,10 @@ public class ExternalUserLogoutFilter extends AbstractAuthenticationProcessingFi
         String requestHeader = request.getHeader(AuthenticationUtil.AUTHORIZATION_HEADER);
         if (StringUtils.isNoneBlank(requestHeader)) {
             String tokenUuid = AuthenticationUtil.tokenExtract(requestHeader, TokenType.APP);
-            UserMeta userMeta = userTokenRepository.getBy(RedisNamespace.USER_NAME_SPACE, tokenUuid);
-            if (userMeta !=  null) {
-                userTokenRepository.delete(RedisNamespace.USER_NAME_SPACE, tokenUuid);
-                return AuthenticationUtil.create(userMeta.getUsername(), userMeta.getRole());
+            ExternalUserMeta externalUserMeta = externalUserTokenRepository.getBy(RedisNamespace.USER_NAME_SPACE, tokenUuid);
+            if (externalUserMeta !=  null) {
+                externalUserTokenRepository.delete(RedisNamespace.USER_NAME_SPACE, tokenUuid);
+                return AuthenticationUtil.createExternalUser(externalUserMeta.getUsername());
             }
             response.setStatus(HttpStatus.FORBIDDEN.value());
             return null;

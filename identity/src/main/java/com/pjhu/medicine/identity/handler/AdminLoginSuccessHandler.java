@@ -1,8 +1,8 @@
 package com.pjhu.medicine.identity.handler;
 
-import com.pjhu.medicine.identity.domain.model.UserTokenRepository;
+import com.pjhu.medicine.identity.domain.model.AdminTokenRepository;
 import com.pjhu.medicine.common.cache.RedisNamespace;
-import com.pjhu.medicine.common.cache.UserMeta;
+import com.pjhu.medicine.common.cache.AdminUserMeta;
 import com.pjhu.medicine.common.utils.SuppressObjectMapper;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpHeaders;
@@ -18,12 +18,12 @@ import java.io.PrintWriter;
 
 public class AdminLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final UserTokenRepository userTokenRepository;
+    private final AdminTokenRepository adminTokenRepository;
     private final SuppressObjectMapper suppressObjectMapper;
 
-    public AdminLoginSuccessHandler(UserTokenRepository userTokenRepository,
+    public AdminLoginSuccessHandler(AdminTokenRepository adminTokenRepository,
                                     SuppressObjectMapper suppressObjectMapper) {
-        this.userTokenRepository = userTokenRepository;
+        this.adminTokenRepository = adminTokenRepository;
         this.suppressObjectMapper = suppressObjectMapper;
     }
 
@@ -34,12 +34,12 @@ public class AdminLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         String role = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .findFirst().orElse(Strings.EMPTY);
-        UserMeta userMeta = new UserMeta(authentication.getName(), role);
-        String token = userTokenRepository.create(RedisNamespace.ADMIN_NAME_SPACE, userMeta);
-        SignInResponse signInResponse = new SignInResponse(token, authentication.getName(), role);
+        AdminUserMeta adminUserMeta = new AdminUserMeta(authentication.getName(), role);
+        String token = adminTokenRepository.create(RedisNamespace.ADMIN_NAME_SPACE, adminUserMeta);
+        AdminSignInResponse adminSignInResponse = new AdminSignInResponse(token, authentication.getName(), role);
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
         PrintWriter printWriter = response.getWriter();
-        printWriter.write(suppressObjectMapper.writeValueAsString(signInResponse));
+        printWriter.write(suppressObjectMapper.writeValueAsString(adminSignInResponse));
         printWriter.flush();
     }
 }

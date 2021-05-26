@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
+import org.springframework.orm.jpa.JpaTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -69,8 +69,10 @@ public class CQRSConfiguration {
 
     @Bean
     @Primary
-    public DataSourceTransactionManager transactionManager() {
+    public JpaTransactionManager transactionManager() {
         log.debug("datasource={}", dataSource());
-        return new DataSourceTransactionManager(dataSource());
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setDataSource(dataSource());
+        return transactionManager;
     }
 }

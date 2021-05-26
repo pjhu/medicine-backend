@@ -1,8 +1,9 @@
 package com.pjhu.medicine.identity.filter;
 
-import com.pjhu.medicine.identity.domain.model.UserTokenRepository;
+import com.pjhu.medicine.identity.domain.model.AdminTokenRepository;
+import com.pjhu.medicine.identity.domain.model.ExternalUserTokenRepository;
 import com.pjhu.medicine.common.cache.RedisNamespace;
-import com.pjhu.medicine.common.cache.UserMeta;
+import com.pjhu.medicine.common.cache.AdminUserMeta;
 import com.pjhu.medicine.identity.utils.AuthenticationUtil;
 import com.pjhu.medicine.identity.utils.TokenType;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class AdminLogoutFilter extends AbstractAuthenticationProcessingFilter {
 
-    private final UserTokenRepository userTokenRepository;
+    private final AdminTokenRepository adminTokenRepository;
 
     public AdminLogoutFilter(String defaultFilterProcessesUrl,
-                             UserTokenRepository userTokenRepository) {
+                             AdminTokenRepository adminTokenRepository) {
         super(defaultFilterProcessesUrl);
-        this.userTokenRepository = userTokenRepository;
+        this.adminTokenRepository = adminTokenRepository;
     }
 
     @Override
@@ -32,10 +33,10 @@ public class AdminLogoutFilter extends AbstractAuthenticationProcessingFilter {
         String requestHeader = request.getHeader(AuthenticationUtil.AUTHORIZATION_HEADER);
         if (StringUtils.isNoneBlank(requestHeader)) {
             String tokenUuid = AuthenticationUtil.tokenExtract(requestHeader, TokenType.ADMIN);
-            UserMeta userMeta = userTokenRepository.getBy(RedisNamespace.ADMIN_NAME_SPACE, tokenUuid);
-            if (userMeta !=  null) {
-                userTokenRepository.delete(RedisNamespace.ADMIN_NAME_SPACE, tokenUuid);
-                return AuthenticationUtil.create(userMeta.getUsername(), userMeta.getRole());
+            AdminUserMeta adminUserMeta = adminTokenRepository.getBy(RedisNamespace.ADMIN_NAME_SPACE, tokenUuid);
+            if (adminUserMeta !=  null) {
+                adminTokenRepository.delete(RedisNamespace.ADMIN_NAME_SPACE, tokenUuid);
+                return AuthenticationUtil.createAdmin(adminUserMeta.getUsername(), adminUserMeta.getRole());
             }
             response.setStatus(HttpStatus.FORBIDDEN.value());
             return null;

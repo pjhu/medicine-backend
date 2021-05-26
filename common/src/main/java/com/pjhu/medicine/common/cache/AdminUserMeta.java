@@ -1,16 +1,20 @@
-package com.pjhu.medicine.identity.handler;
+package com.pjhu.medicine.common.cache;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignInResponse {
-    private String token;
+@ToString
+public class AdminUserMeta {
+
     private String username;
     private String role;
 }
