@@ -8,6 +8,7 @@ dependencies {
     implementation project(":order")
     implementation project(":report")
     implementation project(":cms")
+    implementation project(":blacklist")
 
     runtimeOnly 'mysql:mysql-connector-java'
     // flyway migrate

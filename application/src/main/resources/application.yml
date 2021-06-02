@@ -10,18 +10,21 @@ spring:
       username: root
       password: 123456
       driverClassName: com.mysql.cj.jdbc.Driver
+  redis:
+    host: localhost
+    port: 16379
+    timeout: "15s"
 
 logging:
   level:
     org:
       springframework:
         web: DEBUG
-      hibernate:
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
+        orm:
+          jpa:
+            JpaTransactionManager: DEBUG
+        transaction: DEBUG
+      hibernate: DEBUG
 
 auth:
   admin:

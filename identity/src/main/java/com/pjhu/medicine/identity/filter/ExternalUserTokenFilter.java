@@ -46,7 +46,7 @@ public class ExternalUserTokenFilter extends AbstractAuthenticationProcessingFil
             chain.doFilter(request, response);
             return;
         }
-        String tokenUuid = AuthenticationUtil.tokenExtract(requestHeader, TokenType.APP);
+        String tokenUuid = AuthenticationUtil.tokenExtract(requestHeader, TokenType.USER);
         ExternalUserMeta externalUserMeta = externalUserTokenRepository.getBy(RedisNamespace.USER_NAME_SPACE, tokenUuid);
 
         if (externalUserMeta != null) {

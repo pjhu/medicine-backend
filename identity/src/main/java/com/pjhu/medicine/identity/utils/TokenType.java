@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public enum TokenType {
     ADMIN("Bearer"),
-    APP("App");
+    USER("App");
 
     private String prefix;
 }

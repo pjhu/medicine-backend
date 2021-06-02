@@ -12,4 +12,5 @@ include 'report'
 include 'application'
 include 'cms'
 include 'demo'
+include 'blacklist'
 

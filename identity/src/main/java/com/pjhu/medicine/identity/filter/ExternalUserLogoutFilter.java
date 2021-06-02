@@ -3,7 +3,6 @@ package com.pjhu.medicine.identity.filter;
 import com.pjhu.medicine.common.cache.ExternalUserMeta;
 import com.pjhu.medicine.identity.domain.model.ExternalUserTokenRepository;
 import com.pjhu.medicine.common.cache.RedisNamespace;
-import com.pjhu.medicine.common.cache.AdminUserMeta;
 import com.pjhu.medicine.identity.utils.AuthenticationUtil;
 import com.pjhu.medicine.identity.utils.TokenType;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +31,7 @@ public class ExternalUserLogoutFilter extends AbstractAuthenticationProcessingFi
             throws AuthenticationException {
         String requestHeader = request.getHeader(AuthenticationUtil.AUTHORIZATION_HEADER);
         if (StringUtils.isNoneBlank(requestHeader)) {
-            String tokenUuid = AuthenticationUtil.tokenExtract(requestHeader, TokenType.APP);
+            String tokenUuid = AuthenticationUtil.tokenExtract(requestHeader, TokenType.USER);
             ExternalUserMeta externalUserMeta = externalUserTokenRepository.getBy(RedisNamespace.USER_NAME_SPACE, tokenUuid);
             if (externalUserMeta !=  null) {
                 externalUserTokenRepository.delete(RedisNamespace.USER_NAME_SPACE, tokenUuid);
