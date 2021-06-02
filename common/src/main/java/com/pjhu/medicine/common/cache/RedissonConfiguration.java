@@ -20,7 +20,7 @@ public class RedissonConfiguration {
 
     private final ObjectMapper objectMapper;
 
-    @Bean
+    @Bean(destroyMethod = "shutdown")
     public RedissonClient redissonClient(@Autowired RedisProperties redisProperties) {
         Config config = buildConfig(redisProperties);
         return Redisson.create(config);
