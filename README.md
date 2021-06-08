@@ -72,3 +72,12 @@ invalid(meaningless message)​:[MEM-108] - update
 - 代码的变化必须体现在测试用例中，不得提交没有测试覆盖的代码
 - 必须用git pull --rebase 同步代码
             
+##### 分布式锁
+存储为hash, key为: LOCK::medicine:storage
+field："8d836c0a-e6b7-4b84-8231-fb82a8bb43e8:78" 是uuid + thread-id
+value: "1"
+
+##### cache
+默认使用SimpleCacheConfiguration, 使用ConcurrentMapCacheManager 存储信息，没有过期时间
+使用ConcurrentMapCache中ConcurrentMap保存数据，put写数据，使用lookup查找数据
+需要使用CacheEvict移除

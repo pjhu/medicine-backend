@@ -24,7 +24,7 @@ public class OrderExternalUserController {
 
     @GetMapping("/{id}")
     public OrderResponse getOrder(@PathVariable("id") Long id) {
-        return orderQueryService.getOrder(id);
+        return orderApplicationService.getOrder(id);
     }
 
     @GetMapping

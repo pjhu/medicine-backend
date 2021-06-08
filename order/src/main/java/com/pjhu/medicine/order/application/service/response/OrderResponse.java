@@ -1,11 +1,15 @@
 package com.pjhu.medicine.order.application.service.response;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Builder
 @Getter
-public class OrderResponse {
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class OrderResponse implements Serializable {
 
     private long orderId;
     private Integer totalPrice;

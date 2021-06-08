@@ -31,7 +31,4 @@ auth:
     token:
       expire: 3600
 
-redis:
-  host: localhost
-  port: 16379
-  database: 0
+debug: true
